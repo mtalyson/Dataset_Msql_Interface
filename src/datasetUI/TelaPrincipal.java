@@ -107,12 +107,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ProdutoDAO dao = new ProdutoDAO();
 
         try {
-            int i = 0,j = 0, opcao;
+            int i = 0, j = 0, opcao;
             Reader reader = Files.newBufferedReader(Paths.get("C:\\Users\\Talyson\\Documents\\"
                     + "NetBeansProjects\\Dataset\\src\\arquivoDataset\\Gas Prices in Brazil from 2004 to 2019.csv"));
             CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
 
-            List<String[]> colunas = csvReader.readAll();
+            List<String[]> colunas = csvReader.readAll(); 
             for (String[] coluna : colunas) {
                 p.setIdColuna(coluna[0]);
                 p.setDataInicio(coluna[1]);
@@ -141,7 +141,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 i++;
                 j++;
                 
-                if(j == 10){
+                if(j == 500){
                     opcao = JOptionPane.showConfirmDialog(null, "Você já carregou " + i + " dados no Banco. Deseja Continuar?", "Escolha", JOptionPane.YES_NO_OPTION);
                     j=0;
                     
@@ -190,7 +190,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

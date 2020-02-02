@@ -5,6 +5,9 @@
  */
 package datasetUI;
 
+import java.awt.event.ActionEvent;
+import java.lang.reflect.InvocationTargetException;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import modelBean.Combustivel;
@@ -15,7 +18,6 @@ import modelDAO.ProdutoDAO;
  * @author Talyson
  */
 public class TelaTabela extends javax.swing.JFrame {
-
     /**
      * Creates new form TelaTabela
      */
@@ -25,37 +27,65 @@ public class TelaTabela extends javax.swing.JFrame {
         jTable1.setRowSorter(new TableRowSorter(modelo));
     }
     
-    public void lerTabela(){
+    public void lerTabela() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setNumRows(0);
         ProdutoDAO pdao = new ProdutoDAO();
         
-        for(Combustivel p : pdao.read()){
-            
-            modelo.addRow(new Object[]{
-                p.getIdColuna(),
-                p.getDataInicio(),
-                p.getDataFinal(),
-                p.getRegiao(),
-                p.getEstado(),
-                p.getProduto(),
-                p.getNumeroPostos(),
-                p.getUnidadeMedida(),
-                p.getPrecoMedioRevenda(),
-                p.getDesvioPadraoRevenda(),
-                p.getPrecoMinimoRevenda(),
-                p.getPrecoMaximoRevenda(),
-                p.getMargemMediaRevenda(),
-                p.getCoefVariacaoRevenda(),
-                p.getPrecoMedioDistribuicao(),
-                p.getDesvioPadraoDistribuicao(),
-                p.getPrecoMinimoDistribuicao(),
-                p.getPrecoMaximoDistribuicao(),
-                p.getCoefVariacaoDistribuicao(),
-                p.getMes(),
-                p.getAno(),
-            });
-        }
+        new Thread(new Runnable() {
+            public void run() {
+
+                try {
+                    int count = 0;
+                    for (Combustivel p : pdao.read()) {
+
+                        SwingUtilities.invokeAndWait(new Runnable() {
+                            public void run() {
+
+                                modelo.addRow(new Object[]{
+                                    p.getIdColuna(),
+                                    p.getDataInicio(),
+                                    p.getDataFinal(),
+                                    p.getRegiao(),
+                                    p.getEstado(),
+                                    p.getProduto(),
+                                    p.getNumeroPostos(),
+                                    p.getUnidadeMedida(),
+                                    p.getPrecoMedioRevenda(),
+                                    p.getDesvioPadraoRevenda(),
+                                    p.getPrecoMinimoRevenda(),
+                                    p.getPrecoMaximoRevenda(),
+                                    p.getMargemMediaRevenda(),
+                                    p.getCoefVariacaoRevenda(),
+                                    p.getPrecoMedioDistribuicao(),
+                                    p.getDesvioPadraoDistribuicao(),
+                                    p.getPrecoMinimoDistribuicao(),
+                                    p.getPrecoMaximoDistribuicao(),
+                                    p.getCoefVariacaoDistribuicao(),
+                                    p.getMes(),
+                                    p.getAno(),
+                                });
+                                
+                                jTable1.scrollRectToVisible(jTable1.getCellRect(jTable1.getRowCount()-1, 0, true));
+                            }
+                        });
+                        
+                        count++;
+                        
+                        if (count != 50){
+                            continue;
+                        }else{
+                            synchronized (Thread.currentThread()) {
+                            Thread.currentThread().wait(3000);
+                            }
+                            count = 0;
+                        }
+                    }
+                } catch (InterruptedException | InvocationTargetException e) {
+                    System.out.println(e);
+                }
+            }
+        }).start();
     }
 
     /**
@@ -76,7 +106,7 @@ public class TelaTabela extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,6 +230,7 @@ public class TelaTabela extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -294,7 +325,8 @@ public class TelaTabela extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         lerTabela();
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -340,4 +372,5 @@ public class TelaTabela extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -19,7 +19,7 @@ import modelBean.Combustivel;
  *
  * @author Talyson
  */
-public class ProdutoDAO {
+public class ProdutoDAO {  
     
     public void create(Combustivel p){
 
@@ -59,7 +59,7 @@ public class ProdutoDAO {
             stmt.executeUpdate();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Salvar: " + ex);
+            
         }finally{
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -79,7 +79,7 @@ public class ProdutoDAO {
             while (rs.next()){
                 
                 Combustivel combustivel  = new Combustivel();
-                
+
                 combustivel.setIdColuna(rs.getString("idColuna"));
                 combustivel.setDataInicio(rs.getString("dataInicio"));
                 combustivel.setDataFinal(rs.getString("dataFinal"));
@@ -103,7 +103,6 @@ public class ProdutoDAO {
                 combustivel.setAno(rs.getString("ano"));
                 
                 combustiveis.add(combustivel);
-                
             }
             
         } catch (SQLException ex) {
@@ -114,5 +113,5 @@ public class ProdutoDAO {
         
         return combustiveis;
     }
-    
+
 }
