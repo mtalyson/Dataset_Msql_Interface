@@ -37,14 +37,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        TextoInicial = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         CarregarDataset = new javax.swing.JButton();
         VisualizarDataset = new javax.swing.JButton();
-        TextoInicial = new javax.swing.JLabel();
-        TextoDev = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        TextoInicial.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        TextoInicial.setText("Gas Prices in Brazil: 2004-2019");
+
+        jLabel1.setText("Desenvolvido por: Talyson Moreira Penha");
+
+        CarregarDataset.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         CarregarDataset.setText("Carregar Dataset no Banco de Dados");
         CarregarDataset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,6 +60,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        VisualizarDataset.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         VisualizarDataset.setText("Visualizar Dataset");
         VisualizarDataset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,43 +68,55 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        TextoInicial.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        TextoInicial.setText("DATASET: Gas Prices in Brazil from 2004-2919");
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setText("Sair");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        TextoDev.setText("Desenvolvido por: Talyson Moreira Penha");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagemFundo/background_1.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(VisualizarDataset)
-                        .addGap(154, 154, 154))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextoDev)
-                            .addComponent(CarregarDataset))
-                        .addGap(108, 108, 108))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(TextoInicial)
-                .addGap(43, 43, 43))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(TextoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(CarregarDataset))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(VisualizarDataset))
+            .addComponent(jLabel2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(TextoInicial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(CarregarDataset)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(VisualizarDataset)
-                .addGap(73, 73, 73)
-                .addComponent(TextoDev)
-                .addGap(18, 18, 18))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(300, 300, 300)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(TextoInicial))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(CarregarDataset, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addComponent(VisualizarDataset, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel2)
         );
 
         pack();
@@ -111,7 +132,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             Reader reader = Files.newBufferedReader(Paths.get("C:\\Users\\Talyson\\Documents\\"
                     + "NetBeansProjects\\Dataset\\src\\arquivoDataset\\Gas Prices in Brazil from 2004 to 2019.csv"));
             CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
-
+            
             List<String[]> colunas = csvReader.readAll(); 
             for (String[] coluna : colunas) {
                 p.setIdColuna(coluna[0]);
@@ -141,7 +162,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 i++;
                 j++;
                 
-                if(j == 500){
+                if(j == 1000){
                     opcao = JOptionPane.showConfirmDialog(null, "Você já carregou " + i + " dados no Banco. Deseja Continuar?", "Escolha", JOptionPane.YES_NO_OPTION);
                     j=0;
                     
@@ -163,6 +184,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         new TelaVisualizar().setVisible(true);
         dispose();
     }//GEN-LAST:event_VisualizarDatasetActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,9 +226,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CarregarDataset;
-    private javax.swing.JLabel TextoDev;
     private javax.swing.JLabel TextoInicial;
     private javax.swing.JButton VisualizarDataset;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
     private void lerTabela() {
