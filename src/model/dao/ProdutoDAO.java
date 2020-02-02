@@ -58,8 +58,6 @@ public class ProdutoDAO {
             
             stmt.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Salvo com Sucesso!");
-            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Salvar: " + ex);
         }finally{
