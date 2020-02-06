@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import modelBean.Combustivel;
 import modelDAO.ProdutoDAO;
 
@@ -124,60 +125,79 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CarregarDatasetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarregarDatasetActionPerformed
+        JOptionPane.showMessageDialog(null, "O Dataset está sendo carregado ao Banco de Dados");
+        
         Combustivel p = new Combustivel();
         ProdutoDAO dao = new ProdutoDAO();
 
-        try {
-            int i = 0, j = 0, opcao;
-            Reader reader = Files.newBufferedReader(Paths.get("C:\\Users\\Talyson\\Documents\\"
-                    + "NetBeansProjects\\Dataset\\src\\arquivoDataset\\Gas Prices in Brazil from 2004 to 2019.csv"));
-            CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
-            
-            List<String[]> colunas = csvReader.readAll(); 
-            for (String[] coluna : colunas) {
-                p.setIdColuna(coluna[0]);
-                p.setDataInicio(coluna[1]);
-                p.setDataFinal(coluna[2]);
-                p.setRegiao(coluna[3]);
-                p.setEstado(coluna[4]);
-                p.setProduto(coluna[5]);
-                p.setNumeroPostos(coluna[6]);
-                p.setUnidadeMedida(coluna[7]);
-                p.setPrecoMedioRevenda(coluna[8]);
-                p.setDesvioPadraoRevenda(coluna[9]);
-                p.setPrecoMinimoRevenda(coluna[10]);
-                p.setPrecoMaximoRevenda(coluna[11]);
-                p.setMargemMediaRevenda(coluna[12]);
-                p.setCoefVariacaoRevenda(coluna[13]);
-                p.setPrecoMedioDistribuicao(coluna[14]);
-                p.setDesvioPadraoDistribuicao(coluna[15]);
-                p.setPrecoMinimoDistribuicao(coluna[16]);
-                p.setPrecoMaximoDistribuicao(coluna[17]);
-                p.setCoefVariacaoDistribuicao(coluna[18]);
-                p.setMes(coluna[19]);
-                p.setAno(coluna[20]);
-                
-                dao.create(p);
-                
-                i++;
-                j++;
-                
-                if(j == 1000){
-                    opcao = JOptionPane.showConfirmDialog(null, "Você já carregou " + i + " dados no Banco. Deseja Continuar?", "Escolha", JOptionPane.YES_NO_OPTION);
-                    j=0;
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    int count = 0;
+                    int i = 0, j = 0, opcao;
+                    Reader reader = Files.newBufferedReader(Paths.get("C:\\Users\\Talyson\\Documents\\"
+                            + "NetBeansProjects\\Dataset\\src\\arquivoDataset\\Gas Prices in Brazil from 2004 to 2019.csv"));
+                    CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
+
+                    List<String[]> colunas = csvReader.readAll();
+                    for (String[] coluna : colunas) {
+                        
+                    SwingUtilities.invokeAndWait(new Runnable() {
+
+                        public void run() {
+                            
+                                p.setIdColuna(coluna[0]);
+                                p.setDataInicio(coluna[1]);
+                                p.setDataFinal(coluna[2]);
+                                p.setRegiao(coluna[3]);
+                                p.setEstado(coluna[4]);
+                                p.setProduto(coluna[5]);
+                                p.setNumeroPostos(coluna[6]);
+                                p.setUnidadeMedida(coluna[7]);
+                                p.setPrecoMedioRevenda(coluna[8]);
+                                p.setDesvioPadraoRevenda(coluna[9]);
+                                p.setPrecoMinimoRevenda(coluna[10]);
+                                p.setPrecoMaximoRevenda(coluna[11]);
+                                p.setMargemMediaRevenda(coluna[12]);
+                                p.setCoefVariacaoRevenda(coluna[13]);
+                                p.setPrecoMedioDistribuicao(coluna[14]);
+                                p.setDesvioPadraoDistribuicao(coluna[15]);
+                                p.setPrecoMinimoDistribuicao(coluna[16]);
+                                p.setPrecoMaximoDistribuicao(coluna[17]);
+                                p.setCoefVariacaoDistribuicao(coluna[18]);
+                                p.setMes(coluna[19]);
+                                p.setAno(coluna[20]);
+
+                                dao.create(p);
+                            }
+                        });
+                            i++;
+                            j++;
+                            count++;        
                     
-                    if (opcao == 0) {
-                        continue;
-                    } else {
-                        i = 0;
-                        break;
+                            if (count == 300) {
+                                synchronized (Thread.currentThread()) {
+                                   Thread.currentThread().wait(3000);
+                               }
+                               count = 0;
+                           }
+                            
+                            if(j == 2000){
+                                opcao = JOptionPane.showConfirmDialog(null, "AVISO! Você já carregou " + i + " dados no Banco. Deseja Continuar?", "Escolha", JOptionPane.YES_NO_OPTION);
+                                j=0;
+
+                            if (opcao != 0) {
+                                i = 0;
+                                break;
+                            }
+                        }
                     }
+
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
             }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        }).start();
     }//GEN-LAST:event_CarregarDatasetActionPerformed
 
     private void VisualizarDatasetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VisualizarDatasetActionPerformed
@@ -215,7 +235,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
