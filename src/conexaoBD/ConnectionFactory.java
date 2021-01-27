@@ -17,10 +17,10 @@ import java.sql.SQLException;
  */
 public class ConnectionFactory {
     
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/bddatabase";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://localhost:3306/bddatabase?serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASS = "";
+    private static final String PASS = "admin";
 
     public static Connection getConnection() {
 
