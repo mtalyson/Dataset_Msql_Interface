@@ -7,8 +7,8 @@ Projeto JAVA Swing de leitura de um conjunto de dados (Dataset) de arquivo CSV, 
 ### Tela Inicial, Tela Visualizar Tabela:
 
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/45837182/105942160-765cd900-603d-11eb-88d5-a2159155ad79.jpg" width="430">
-  <img src="https://user-images.githubusercontent.com/45837182/105941791-f6cf0a00-603c-11eb-94ce-bc9863a2c942.jpg" width="430">
+  <img src="https://user-images.githubusercontent.com/45837182/105942160-765cd900-603d-11eb-88d5-a2159155ad79.jpg" width="400">
+  <img src="https://user-images.githubusercontent.com/45837182/105941791-f6cf0a00-603c-11eb-94ce-bc9863a2c942.jpg" width="400">
 </p>
 
 ### Tela Carregamento Dataset:
